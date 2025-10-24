@@ -1,0 +1,13 @@
+Testsuite: edu.sc.csce747.MeetingPlanner.MeetingTest
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.173 sec
+
+Testcase: initializationError took 0.002 sec
+	Caused an ERROR
+Invalid test class 'edu.sc.csce747.MeetingPlanner.MeetingTest':
+  1. No runnable methods
+org.junit.runners.model.InvalidTestClassError: Invalid test class 'edu.sc.csce747.MeetingPlanner.MeetingTest':
+  1. No runnable methods
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:501)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:485)
+

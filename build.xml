@@ -1,47 +1,76 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project name="MeetingPlanner" basedir="." default="test">
 
+    <!-- Define paths -->
     <property name="src.main" location="src/main/java"/>
     <property name="src.test" location="src/test/java"/>
-    <property name="build" location="build"/>
+    <property name="build" location="build/classes"/>
+    <property name="build.test" location="build/test-classes"/>
     <property name="doc" location="javadoc"/>
 
-    <!-- include all jars from lib on classpath -->
+    <!-- Include all jars from lib on classpath -->
     <path id="project.class.path">
         <fileset dir="lib" includes="**/*.jar"/>
     </path>
 
+    <!-- Clean build + docs -->
     <target name="clean">
         <delete dir="${build}"/>
+        <delete dir="${build.test}"/>
         <delete dir="${doc}"/>
     </target>
 
+    <!-- Compile main source -->
     <target name="compile">
         <mkdir dir="${build}"/>
-        <javac srcdir="${src.main}" destdir="${build}" classpathref="project.class.path" includeantruntime="false"/>
+        <javac srcdir="${src.main}" destdir="${build}"
+               classpathref="project.class.path"
+               includeantruntime="false"/>
     </target>
 
+    <!-- Compile tests -->
     <target name="compile-tests" depends="compile">
-        <mkdir dir="${build}"/>
-        <javac srcdir="${src.test}" destdir="${build}" classpathref="project.class.path" includeantruntime="false"/>
+        <mkdir dir="${build.test}"/>
+        <javac srcdir="${src.test}" destdir="${build.test}" includeantruntime="false">
+            <classpath>
+                <!-- compiled main classes -->
+                <pathelement location="${build}"/>
+                <!-- all jars from lib (including junit) -->
+                <path refid="project.class.path"/>
+            </classpath>
+        </javac>
     </target>
 
+
+    <!-- Generate Javadoc -->
     <target name="javadoc">
         <mkdir dir="${doc}"/>
-        <javadoc sourcepath="${src.main}" destdir="${doc}" author="true" version="true"/>
+        <javadoc sourcepath="${src.main}" destdir="${doc}"
+                 author="true" version="true" use="true"
+                 classpathref="project.class.path">
+            <doctitle><![CDATA[Meeting Planner API Documentation]]></doctitle>
+        </javadoc>
     </target>
 
+    <!-- Run JUnit tests -->
     <target name="test" depends="compile-tests">
+        <mkdir dir="build/test-reports"/>
         <junit printsummary="yes" haltonfailure="no" fork="yes">
             <classpath>
                 <path refid="project.class.path"/>
                 <pathelement path="${build}"/>
+                <pathelement path="${build.test}"/>
             </classpath>
-            <batchtest todir="${build}/test-reports">
-                <fileset dir="${build}">
-                    <include name="**/*Test.class"/>
+
+            <formatter type="plain"/>
+            <formatter type="xml"/>
+
+            <batchtest todir="build/test-reports">
+                <fileset dir="${src.test}">
+                    <include name="**/*Test.java"/>
                 </fileset>
             </batchtest>
         </junit>
     </target>
+
 </project>
