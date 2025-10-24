@@ -31,10 +31,12 @@ jobs:
       - name: Run Ant tests
         run: |
           ant clean
-          ant test -Dtest.reports.dir=build/test-reports
+          ant test
         continue-on-error: false
 
-      - name: Publish JUnit test results
-        uses: mikeal/junit-report@v1
+      - name: Upload JUnit Test Results
+        uses: actions/upload-test-results@v3
         with:
-          path: build/test-reports/*.xml
+          test-results-files: build/test-reports/*.xml
+          merge-test-results: true
+          fail-on-error: true
