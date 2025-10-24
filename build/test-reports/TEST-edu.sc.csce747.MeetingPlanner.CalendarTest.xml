@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="DESKTOP-DG7QGI5" name="edu.sc.csce747.MeetingPlanner.CalendarTest" skipped="0" tests="6" time="0.14" timestamp="2025-10-24T05:16:41">
+<testsuite errors="0" failures="0" hostname="DESKTOP-DG7QGI5" name="edu.sc.csce747.MeetingPlanner.CalendarTest" skipped="0" tests="6" time="0.114" timestamp="2025-10-24T05:18:05">
   <properties>
     <property name="ant.library.dir" value="C:\Program Files\apache-ant-1.10.15\lib" />
     <property name="ant.file.type" value="file" />
@@ -18,7 +18,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD" />
     <property name="user.country" value="US" />
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-23\bin" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner edu.sc.csce747.MeetingPlanner.CalendarTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.SummaryJUnitResultFormatter showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.PlainJUnitResultFormatter,C:\Users\Lenovo\OneDrive\Documents\F.CSA313\MeetingPlanner\build\test-reports\TEST-edu.sc.csce747.MeetingPlanner.CalendarTest.txt formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Lenovo\OneDrive\Documents\F.CSA313\MeetingPlanner\build\test-reports\TEST-edu.sc.csce747.MeetingPlanner.CalendarTest.xml crashfile=C:\Users\Lenovo\OneDrive\Documents\F.CSA313\MeetingPlanner\junitvmwatcher5463539836544787636.properties propsfile=C:\Users\Lenovo\OneDrive\Documents\F.CSA313\MeetingPlanner\junit10165039246619313315.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner edu.sc.csce747.MeetingPlanner.CalendarTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.SummaryJUnitResultFormatter showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.PlainJUnitResultFormatter,C:\Users\Lenovo\OneDrive\Documents\F.CSA313\MeetingPlanner\build\test-reports\TEST-edu.sc.csce747.MeetingPlanner.CalendarTest.txt formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Lenovo\OneDrive\Documents\F.CSA313\MeetingPlanner\build\test-reports\TEST-edu.sc.csce747.MeetingPlanner.CalendarTest.xml crashfile=C:\Users\Lenovo\OneDrive\Documents\F.CSA313\MeetingPlanner\junitvmwatcher16065239784155326176.properties propsfile=C:\Users\Lenovo\OneDrive\Documents\F.CSA313\MeetingPlanner\junit9194199425955620953.properties" />
     <property name="jdk.debug" value="release" />
     <property name="sun.cpu.endian" value="little" />
     <property name="user.home" value="C:\Users\Lenovo" />
@@ -71,8 +71,8 @@
     <property name="java.class.version" value="67.0" />
     <property name="ant.project.default-target" value="test" />
   </properties>
-  <testcase classname="edu.sc.csce747.MeetingPlanner.CalendarTest" name="testRemoveMeeting_Success" time="0.008" />
-  <testcase classname="edu.sc.csce747.MeetingPlanner.CalendarTest" name="testOverlappingMeetings_ThrowsException" time="0.016" />
+  <testcase classname="edu.sc.csce747.MeetingPlanner.CalendarTest" name="testRemoveMeeting_Success" time="0.004" />
+  <testcase classname="edu.sc.csce747.MeetingPlanner.CalendarTest" name="testOverlappingMeetings_ThrowsException" time="0.015" />
   <testcase classname="edu.sc.csce747.MeetingPlanner.CalendarTest" name="testInvalidTimeRange_ThrowsException" time="0.0" />
   <testcase classname="edu.sc.csce747.MeetingPlanner.CalendarTest" name="testAddMeeting_Valid" time="0.0" />
   <testcase classname="edu.sc.csce747.MeetingPlanner.CalendarTest" name="testInvalidMonth_ThrowsException" time="0.0" />
