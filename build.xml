@@ -62,7 +62,9 @@
                 <pathelement path="${build.test}"/>
             </classpath>
 
+            <!-- Text тайлан -->
             <formatter type="plain"/>
+            <!-- XML тайлан -->
             <formatter type="xml"/>
 
             <batchtest todir="build/test-reports">
@@ -71,6 +73,13 @@
                 </fileset>
             </batchtest>
         </junit>
+    </target>
+
+    <target name="copy-test-reports" depends="test">
+        <mkdir dir="reports"/>
+        <copy todir="reports" flatten="true">
+            <fileset dir="build/test-reports" includes="*.txt, *.xml"/>
+        </copy>
     </target>
 
 </project>
