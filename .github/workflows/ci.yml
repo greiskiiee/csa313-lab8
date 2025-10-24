@@ -33,10 +33,3 @@ jobs:
           ant clean
           ant test
         continue-on-error: false
-
-      - name: Upload JUnit Test Results
-        uses: actions/upload-test-results@v3
-        with:
-          test-results-files: build/test-reports/*.xml
-          merge-test-results: true
-          fail-on-error: true
