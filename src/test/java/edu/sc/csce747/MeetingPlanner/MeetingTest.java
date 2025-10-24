@@ -21,12 +21,14 @@ public class MeetingTest {
         bob = new Person("Bob");
     }
 
+    // Test adding an attendee
     @Test
     public void testAddAttendee() {
         meeting.addAttendee(alice);
         assertTrue(meeting.getAttendees().contains(alice));
     }
 
+    // Test removing an attendee
     @Test
     public void testRemoveAttendee() {
         meeting.addAttendee(alice);
@@ -36,6 +38,7 @@ public class MeetingTest {
         assertTrue(meeting.getAttendees().contains(bob));
     }
 
+    // Test constructors
     @Test
     public void testConstructors() {
         // Test day-blocking constructor
@@ -47,6 +50,7 @@ public class MeetingTest {
         assertEquals("Holiday", dayMeeting.getDescription());
     }
 
+    // Test getters and setters
     @Test
     public void testGettersAndSetters() {
         meeting.setMonth(7);
@@ -65,6 +69,7 @@ public class MeetingTest {
         assertEquals(newRoom, meeting.getRoom());
     }
 
+    // Test toString method
     @Test
     public void testToString() {
         meeting.addAttendee(alice);
