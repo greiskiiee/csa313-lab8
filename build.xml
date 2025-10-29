@@ -84,7 +84,8 @@
     </target>
 
     <!-- JaCoCo coverage target -->
-    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml" classpath="lib/jacocoant.jar"/>
+    <taskdef resource="org/jacoco/ant/antlib.xml" uri="jacoco"
+            classpath="lib/jacocoant.jar"/>
 
     <target name="coverage" depends="compile-tests">
         <mkdir dir="${jacoco.dir}"/>
@@ -104,7 +105,6 @@
             </junit>
         </jacoco:coverage>
 
-        <!-- Generate HTML, XML, CSV reports -->
         <jacoco:report>
             <executiondata>
                 <file file="${jacoco.dir}/jacoco.exec"/>
@@ -122,5 +122,6 @@
             <csv destfile="${reports.dir}/jacoco.csv"/>
         </jacoco:report>
     </target>
+
 
 </project>
