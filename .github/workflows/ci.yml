@@ -1,12 +1,10 @@
-name: Java CI with Ant
+name: Java CI with Ant & JaCoCo
 
 on:
   push:
-    branches:
-      - "**"
+    branches: ["**"]
   pull_request:
-    branches:
-      - "**"
+    branches: ["**"]
 
 jobs:
   build-and-test:
@@ -22,14 +20,26 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Verify Java version
-        run: java -version
-
       - name: Install Ant
         run: sudo apt-get install -y ant
 
-      - name: Run Ant tests
+      - name: Download JaCoCo
         run: |
-          ant clean
-          ant test
-        continue-on-error: false
+          mkdir -p lib
+          curl -L -o lib/jacocoant.jar https://repo1.maven.org/maven2/org/jacoco/org.jacoco.ant/0.8.12/org.jacoco.ant-0.8.12.jar
+
+      - name: Run tests and coverage
+        run: ant clean coverage
+
+      - name: Extract total coverage %
+        run: |
+          COVERAGE=$(xmllint --xpath "string(//counter[@type='INSTRUCTION']/@covered)" build/test-reports/jacoco.xml)
+          TOTAL=$(xmllint --xpath "string(//counter[@type='INSTRUCTION']/@missed)" build/test-reports/jacoco.xml)
+          TOTAL_COVERAGE=$(echo "scale=2; $COVERAGE*100/($COVERAGE+$TOTAL)" | bc)
+          echo "### Total Instruction Coverage: $TOTAL_COVERAGE % ###"
+
+      - name: Upload coverage HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-html-report
+          path: build/test-reports/jacoco-html

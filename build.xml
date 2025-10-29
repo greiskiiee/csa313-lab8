@@ -7,6 +7,8 @@
     <property name="build" location="build/classes"/>
     <property name="build.test" location="build/test-classes"/>
     <property name="doc" location="javadoc"/>
+    <property name="reports.dir" location="build/test-reports"/>
+    <property name="jacoco.dir" location="build/jacoco"/>
 
     <!-- Include all jars from lib on classpath -->
     <path id="project.class.path">
@@ -18,6 +20,8 @@
         <delete dir="${build}"/>
         <delete dir="${build.test}"/>
         <delete dir="${doc}"/>
+        <delete dir="${reports.dir}"/>
+        <delete dir="${jacoco.dir}"/>
     </target>
 
     <!-- Compile main source -->
@@ -33,14 +37,11 @@
         <mkdir dir="${build.test}"/>
         <javac srcdir="${src.test}" destdir="${build.test}" includeantruntime="false">
             <classpath>
-                <!-- compiled main classes -->
                 <pathelement location="${build}"/>
-                <!-- all jars from lib (including junit) -->
                 <path refid="project.class.path"/>
             </classpath>
         </javac>
     </target>
-
 
     <!-- Generate Javadoc -->
     <target name="javadoc">
@@ -54,7 +55,7 @@
 
     <!-- Run JUnit tests -->
     <target name="test" depends="compile-tests">
-        <mkdir dir="build/test-reports"/>
+        <mkdir dir="${reports.dir}"/>
         <junit printsummary="yes" haltonfailure="no" fork="yes">
             <classpath>
                 <path refid="project.class.path"/>
@@ -62,12 +63,11 @@
                 <pathelement path="${build.test}"/>
             </classpath>
 
-            <!-- Text тайлан -->
+            <!-- Text and XML report -->
             <formatter type="plain"/>
-            <!-- XML тайлан -->
             <formatter type="xml"/>
 
-            <batchtest todir="build/test-reports">
+            <batchtest todir="${reports.dir}">
                 <fileset dir="${src.test}">
                     <include name="**/*Test.java"/>
                 </fileset>
@@ -75,11 +75,52 @@
         </junit>
     </target>
 
+    <!-- Copy test reports to repo -->
     <target name="copy-test-reports" depends="test">
         <mkdir dir="reports"/>
         <copy todir="reports" flatten="true">
-            <fileset dir="build/test-reports" includes="*.txt, *.xml"/>
+            <fileset dir="${reports.dir}" includes="*.txt, *.xml"/>
         </copy>
+    </target>
+
+    <!-- JaCoCo coverage target -->
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml" classpath="lib/jacocoant.jar"/>
+
+    <target name="coverage" depends="compile-tests">
+        <mkdir dir="${jacoco.dir}"/>
+        <jacoco:coverage destfile="${jacoco.dir}/jacoco.exec">
+            <junit printsummary="yes" haltonfailure="no" fork="true">
+                <classpath>
+                    <pathelement path="${build}"/>
+                    <pathelement path="${build.test}"/>
+                    <path refid="project.class.path"/>
+                </classpath>
+                <formatter type="xml"/>
+                <batchtest todir="${reports.dir}">
+                    <fileset dir="${src.test}">
+                        <include name="**/*Test.java"/>
+                    </fileset>
+                </batchtest>
+            </junit>
+        </jacoco:coverage>
+
+        <!-- Generate HTML, XML, CSV reports -->
+        <jacoco:report>
+            <executiondata>
+                <file file="${jacoco.dir}/jacoco.exec"/>
+            </executiondata>
+            <structure name="MeetingPlanner">
+                <classfiles>
+                    <fileset dir="${build}"/>
+                </classfiles>
+                <sourcefiles encoding="UTF-8">
+                    <fileset dir="${src.main}"/>
+                </sourcefiles>
+            </structure>
+            <html destdir="${reports.dir}/jacoco-html"/>
+            <xml destfile="${reports.dir}/jacoco.xml"/>
+            <csv destfile="${reports.dir}/jacoco.csv"/>
+        </jacoco:report>
     </target>
 
 </project>
