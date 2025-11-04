@@ -15,6 +15,18 @@
         <fileset dir="lib" includes="**/*.jar"/>
     </path>
 
+    <!-- JaCoCo classpath -->
+    <path id="jacoco.classpath">
+        <fileset dir="lib" includes="jacoco*.jar"/>
+        <fileset dir="lib" includes="org.jacoco.*.jar"/>
+        <fileset dir="lib" includes="asm*.jar"/>
+    </path>
+
+    <!-- JaCoCo coverage target -->
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+        <classpath refid="jacoco.classpath"/>
+    </taskdef>
+            
     <!-- Clean build + docs -->
     <target name="clean">
         <delete dir="${build}"/>
@@ -83,11 +95,7 @@
         </copy>
     </target>
 
-    <!-- JaCoCo coverage target -->
-    <taskdef resource="org/jacoco/ant/antlib.xml" uri="jacoco"
-            classpath="lib/jacocoant.jar"/>
-
-    <target name="coverage" depends="compile-tests">
+    <target name="coverage" depends="compile-tests" xmlns:jacoco="antlib:org.jacoco.ant">
         <mkdir dir="${jacoco.dir}"/>
         <jacoco:coverage destfile="${jacoco.dir}/jacoco.exec">
             <junit printsummary="yes" haltonfailure="no" fork="true">
@@ -96,7 +104,6 @@
                     <pathelement path="${build.test}"/>
                     <path refid="project.class.path"/>
                 </classpath>
-                <formatter type="xml"/>
                 <batchtest todir="${reports.dir}">
                     <fileset dir="${src.test}">
                         <include name="**/*Test.java"/>
@@ -121,7 +128,7 @@
             <xml destfile="${reports.dir}/jacoco.xml"/>
             <csv destfile="${reports.dir}/jacoco.csv"/>
         </jacoco:report>
-    </target>
 
+    </target>
 
 </project>

@@ -1,9 +1,0 @@
-Testsuite: edu.sc.csce747.MeetingPlanner.OrganizationTest
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.117 sec
-
-Testcase: testGetRoomByID_NonExistingRoom took 0.016 sec
-Testcase: testGetRoomByID_ExistingRoom took 0 sec
-Testcase: testRoomsInitialization took 0 sec
-Testcase: testGetEmployeeByName_NonExistingEmployee took 0 sec
-Testcase: testEmployeesInitialization took 0 sec
-Testcase: testGetEmployeeByName_ExistingEmployee took 0 sec

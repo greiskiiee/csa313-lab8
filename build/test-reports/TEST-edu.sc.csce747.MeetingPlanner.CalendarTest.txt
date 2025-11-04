@@ -1,9 +1,0 @@
-Testsuite: edu.sc.csce747.MeetingPlanner.CalendarTest
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.125 sec
-
-Testcase: testRemoveMeeting_Success took 0.005 sec
-Testcase: testOverlappingMeetings_ThrowsException took 0.014 sec
-Testcase: testInvalidTimeRange_ThrowsException took 0.001 sec
-Testcase: testAddMeeting_Valid took 0 sec
-Testcase: testInvalidMonth_ThrowsException took 0 sec
-Testcase: testInvalidDay_ThrowsException took 0 sec
