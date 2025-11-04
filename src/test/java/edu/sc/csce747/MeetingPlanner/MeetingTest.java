@@ -82,4 +82,24 @@ public class MeetingTest {
         assertTrue(result.contains("Bob"));
         assertTrue(result.contains("R101"));
     }
+
+    @Test
+    public void testMeetingMonthDayConstructor() {
+        Meeting m = new Meeting(8, 5);
+        assertEquals(8, m.getMonth());
+        assertEquals(5, m.getDay());
+        assertEquals(0, m.getStartTime());
+        assertEquals(23, m.getEndTime());
+        assertNotNull(m.getAttendees());
+    }
+
+    @Test
+    public void testMeetingMonthDayStartEndConstructor() {
+        Meeting m = new Meeting(9, 10, 14, 16);
+        assertEquals(9, m.getMonth());
+        assertEquals(10, m.getDay());
+        assertEquals(14, m.getStartTime());
+        assertEquals(16, m.getEndTime());
+    }
+
 }

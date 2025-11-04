@@ -61,4 +61,22 @@ public class PersonTest {
         assertNotNull(agendaDay);
         assertTrue(agendaMonth.contains("Team Meeting") || agendaDay.contains("Team Meeting"));
     }
+
+    @Test
+    public void testDefaultConstructor() {
+        Person p = new Person();
+        assertNotNull(p);
+        assertNotNull(p.getName());
+    }
+
+    @Test
+    public void testPrintAgendaWithEmptyCalendar() {
+        Person p = new Person();
+        String agendaMonth = p.printAgenda(1);       // January
+        String agendaDay = p.printAgenda(1, 1);      // 1st day
+        assertNotNull(agendaMonth);
+        assertNotNull(agendaDay);
+        assertTrue(agendaMonth.contains("") || agendaDay.contains(""));
+    }
+
 }

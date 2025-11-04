@@ -17,6 +17,13 @@ public class RoomTest {
         room.addMeeting(meeting);
     }
 
+    @Test
+    public void testDefaultConstructor() {
+        Room r = new Room();
+        assertNotNull(r);
+        assertEquals("", r.getID());
+    }
+
     // Test adding a meeting
     @Test
     public void testAddMeeting() throws TimeConflictException {

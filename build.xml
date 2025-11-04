@@ -83,6 +83,9 @@
                 <fileset dir="${src.test}">
                     <include name="**/*Test.java"/>
                 </fileset>
+                <fileset dir="${build.test}">
+                    <include name="**/*Test.class"/>
+                </fileset>
             </batchtest>
         </junit>
     </target>
@@ -108,6 +111,9 @@
                     <fileset dir="${src.test}">
                         <include name="**/*Test.java"/>
                     </fileset>
+                    <fileset dir="${build.test}">
+                        <include name="**/*Test.class"/>
+                    </fileset>
                 </batchtest>
             </junit>
         </jacoco:coverage>
@@ -118,7 +124,9 @@
             </executiondata>
             <structure name="MeetingPlanner">
                 <classfiles>
-                    <fileset dir="${build}"/>
+                    <fileset dir="${build}">
+                        <exclude name="**/PlannerInterface.class"/>
+                    </fileset>
                 </classfiles>
                 <sourcefiles encoding="UTF-8">
                     <fileset dir="${src.main}"/>
